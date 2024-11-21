@@ -1,0 +1,22 @@
+@font-face {
+  font-family: "Newake";
+  src: url("../fonts/NewakeFont-Demo.otf");
+  src: url("../fonts/NewakeFont-Demo.otf") format("embedded-opentype");
+}
+
+@font-face {
+  font-family: "Gotham";
+  src: url("../fonts/Gotham-Medium.otf");
+  src: url("../fonts/Gotham-Medium.otf") format("embedded-opentype");
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+// Fonts
+$newake: "Newake", sans-serif;
+$gotham: "Gotham", sans-serif;
+$inter: "Inter", serif;
+
+// Font Awesome Vars
+$fa-font-path: "../fonts";
+$fa-font-display: swap;

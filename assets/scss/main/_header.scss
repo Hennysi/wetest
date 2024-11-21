@@ -1,0 +1,123 @@
+.header {
+  position: relative;
+
+  &.is-active {
+    .header__top {
+      background-color: #fff;
+    }
+
+    .header__bottom {
+      opacity: 1;
+    }
+  }
+
+  &__top {
+    border-bottom: 1px solid #737373;
+    padding: rem-calc(52 0 32);
+    position: relative;
+    z-index: 9;
+    transition: all 0.4s;
+  }
+
+  &__bottom {
+    box-shadow: rem-calc(0 8 7 2) #6c6c6c1f;
+    padding: rem-calc(20 0);
+    // transform: translateY(-100%);
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 9;
+    background-color: #fff;
+    transition: all 0.4s;
+    opacity: 0;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    a {
+      text-decoration: none;
+      color: #292929;
+      font-weight: 900;
+      font-size: rem-calc(36);
+    }
+  }
+
+  &__menu {
+    &--btn {
+      width: rem-calc(40);
+      height: rem-calc(40);
+      position: relative;
+      cursor: pointer;
+
+      &.is-active {
+        span {
+          transform: translateX(-50%) rotate(45deg);
+        }
+        span:before {
+          opacity: 0;
+        }
+        span:after {
+          transform: rotate(90deg);
+        }
+      }
+
+      span {
+        width: rem-calc(30);
+        display: block;
+        height: 2px;
+        background-color: #292929;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%);
+        border-radius: 3px;
+        transition: all 0.4s;
+
+        &:before,
+        &:after {
+          content: "";
+          height: 2px;
+          width: 100%;
+          background-color: #292929;
+          position: absolute;
+          left: 0;
+          top: 0;
+          border-radius: 3px;
+          transition: all 0.4s;
+        }
+
+        &:before {
+          transform: translateY(rem-calc(-6));
+        }
+
+        &:after {
+          transform: translateY(rem-calc(6));
+        }
+      }
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: rem-calc(20);
+      list-style: none;
+
+      .menu-item a {
+        text-decoration: none;
+        color: #000;
+        font-family: $inter;
+        transition: all 0.4s;
+
+        &:hover {
+          color: #0282a6;
+        }
+      }
+    }
+  }
+}

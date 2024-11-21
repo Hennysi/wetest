@@ -1,0 +1,131 @@
+// Main Fuctions
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+      str-replace(
+        str-slice($string, $index + str-length($search)),
+        $search,
+        $replace
+      );
+  }
+
+  @return $string;
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@function str-split($string, $delimiter: " ") {
+  $index: str-index($string, $delimiter);
+  $str-list: ();
+
+  @while $index != null {
+    $str-list: append($str-list, str-slice($string, 1, $index - 1), comma);
+    $string: str-slice($string, $index + str-length($delimiter));
+    $index: str-index($string, $delimiter);
+  }
+
+  $str-list: append($str-list, $string, comma);
+  @return $str-list;
+}
+
+// Encode symbols
+@function url-encode($string) {
+  $map: (
+    "%": "%25",
+    "<": "%3C",
+    ">": "%3E",
+    " ": "%20",
+    "!": "%21",
+    "*": "%2A",
+    "'": "%27",
+    '"': "%22",
+    "(": "%28",
+    ")": "%29",
+    ";": "%3B",
+    "@": "%40",
+    "&": "%26",
+    "=": "%3D",
+    "+": "%2B",
+    "$": "%24",
+    "?": "%3F",
+    "#": "%23",
+    "[": "%5B",
+    "]": "%5D",
+  );
+
+  $new: $string;
+
+  @each $search, $replace in $map {
+    $new: str-replace($new, $search, $replace);
+  }
+
+  @return $new;
+}
+
+// Format the SVG as a URL
+@function inline-svg($string) {
+  @return url("data:image/svg+xml,#{url-encode($string)}");
+}
+
+// Covert pixels to vw
+@function vw($val, $base: 1920) {
+  $size: strip-unit($val);
+  $vw_value: $size / $base * 100vw;
+  @return $vw_value;
+}
+
+// Calc gap
+@function calc-gap($columns, $gap) {
+  $rem: #{$gap/16}rem;
+  $result: calc(
+    100% / #{$columns} - (#{$rem} / #{$columns} * (#{$columns} - 1))
+  );
+
+  @return $result;
+}
+
+// Rem Calc
+@function rem-calc($values, $base-font-size: 16px) {
+  $base-font-size: strip-unit($base-font-size);
+
+  $rem-values: ();
+  @each $value in $values {
+    $rem-values: append($rem-values, ($value / $base-font-size) * 1rem, space);
+  }
+  @return $rem-values;
+}
+
+// Breakpoint
+@mixin breakpoint($args) {
+  $args-str: inspect($args);
+  $args-split: str-split($args-str, " ");
+
+  $width: nth($args-split, 1);
+  $direction: if(length($args-split) > 1, nth($args-split, 2), null);
+
+  @if $direction == "up" {
+    @media (min-width: #{$width}px) {
+      @content;
+    }
+  } @else if $direction == "down" {
+    @media (max-width: #{$width}px) {
+      @content;
+    }
+  } @else if $direction != null {
+    @media (min-width: #{$width}px) and (max-width: #{$direction}px) {
+      @content;
+    }
+  } @else {
+    @media (min-width: #{$width}px) {
+      @content;
+    }
+  }
+}

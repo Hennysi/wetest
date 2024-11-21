@@ -1,0 +1,183 @@
+.banner {
+  margin-bottom: rem-calc(220);
+  padding-top: rem-calc(133);
+  position: relative;
+
+  &__images {
+    img {
+      pointer-events: none;
+    }
+
+    .hand-left {
+      position: absolute;
+      left: 0;
+      bottom: rem-calc(91);
+      width: rem-calc(397);
+      height: rem-calc(450);
+    }
+
+    .hand-right {
+      position: absolute;
+      right: 0;
+      top: rem-calc(-120);
+      width: rem-calc(464);
+      height: rem-calc(471);
+    }
+
+    .waves {
+      position: absolute;
+      left: rem-calc(192);
+    }
+
+    .moon {
+      position: absolute;
+      left: rem-calc(227);
+      top: 50%;
+      transform: translateY(-50%);
+      width: rem-calc(142);
+      height: rem-calc(148);
+    }
+
+    .flower {
+      position: absolute;
+      right: rem-calc(410);
+      top: rem-calc(15);
+      width: rem-calc(142);
+      height: rem-calc(148);
+    }
+
+    .star {
+      position: absolute;
+      right: rem-calc(410);
+      top: rem-calc(637);
+      width: rem-calc(142);
+      height: rem-calc(148);
+    }
+  }
+
+  &__socials {
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: rem-calc(35);
+      margin-bottom: rem-calc(50);
+
+      .social {
+        &::marker {
+          content: none;
+        }
+      }
+
+      .social a {
+        border: 1px solid #000;
+        border-radius: rem-calc(10);
+        display: inline-block;
+        width: rem-calc(52);
+        height: rem-calc(52);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.4s;
+
+        &:hover {
+          background-color: #f5f5f5;
+          transform: scale(0.95);
+        }
+
+        svg {
+          width: rem-calc(38);
+          height: rem-calc(38);
+        }
+      }
+    }
+  }
+
+  &__text {
+    font-size: rem-calc(130);
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    text-align: center;
+
+    h1 {
+      background: url("../images/banner-text.jpeg") no-repeat center;
+      background-size: cover;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  &__arrow-down {
+    text-align: center;
+    margin-top: rem-calc(70);
+    animation: MoveUpDown 3s linear infinite;
+
+    svg {
+      width: rem-calc(76);
+      height: rem-calc(150);
+    }
+  }
+
+  @keyframes MoveUpDown {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(rem-calc(20));
+    }
+  }
+}
+
+.faq {
+  &__title {
+    font-size: rem-calc(64);
+    text-align: center;
+  }
+
+  &__accordions {
+    margin-top: rem-calc(20);
+
+    &--accordion {
+      box-shadow: rem-calc(0 4 20 0) #1e1e1e0a;
+      margin-bottom: rem-calc(20);
+
+      .icon {
+        transition: all 0.4s;
+        cursor: pointer;
+      }
+    }
+
+    &--accordion.active {
+      .icon {
+        transform: rotate(-90deg);
+      }
+
+      .faq__accordions--content {
+        display: block;
+      }
+    }
+
+    &--name {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: rem-calc(24 40);
+      font-size: rem-calc(28);
+      font-weight: 600;
+      color: #303030;
+      font-family: $inter;
+    }
+
+    &--content {
+      padding: rem-calc(10 40);
+      display: none;
+      font-family: $inter;
+      font-size: rem-calc(20);
+
+      p {
+        margin-bottom: rem-calc(15);
+      }
+    }
+  }
+}
